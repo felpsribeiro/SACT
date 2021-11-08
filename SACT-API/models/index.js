@@ -1,10 +1,10 @@
 const fs = require('fs');
 const path = require('path');
 const Sequelize = require('sequelize');
-const envConfigs =  require('../config/bd.js');
+const envConfigs = require('../config/db');
 
 const basename = path.basename(__filename);
-const config = envConfigs
+const config = envConfigs;
 const db = {};
 
 let sequelize = new Sequelize(config.database, config.username, config.password, config);
@@ -20,6 +20,12 @@ fs
   });
 
 Object.keys(db).forEach(modelName => {
+  //create table if not exists...
+  const init = async () => {
+    await db[modelName].sync();
+  };
+  init();
+  
   if (db[modelName].associate) {
     db[modelName].associate(db);
   }
@@ -27,5 +33,15 @@ Object.keys(db).forEach(modelName => {
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
+
+(async function () {
+  try {
+    await sequelize.authenticate();
+    console.log('Conexão com banco estabelecida com sucesso.\n\n');
+  } catch (error) {
+    console.error('Não foi possível se conectar com o banco: ', error);
+    console.log('********************************************');
+  }
+})();
 
 module.exports = db;
