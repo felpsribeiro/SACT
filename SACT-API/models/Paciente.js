@@ -1,15 +1,16 @@
 
 module.exports = (sequelize, DataTypes) => {
     const Paciente = sequelize.define('Paciente', {
-        id: {
-            type: DataTypes.INTEGER,
-            primaryKey: true,
-            autoIncrement: true
+        cpf: {
+            type: DataTypes.STRING(11),
+            primaryKey: true
         },
-        pessoa_cpf: {
+        nome: {
             type: DataTypes.STRING,
             allowNull: false
-        }
+        },
+        idade: DataTypes.INTEGER,
+        endereco: DataTypes.STRING
     }, {
         // don't add the timestamp attributes (updatedAt, createdAt)
         createdAt: false,
@@ -18,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
         tableName: 'pacientes'
     });
     Paciente.associate = (models) => {
-        Paciente.belongsTo(models.Pessoa, {foreignKey: 'pessoa_cpf', as: 'pessoa'});
+        Paciente.hasMany(models.Consulta, {foreignKey: 'paciente_cpf', as: 'consultas'});
     }
     return Paciente;
 }

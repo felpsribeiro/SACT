@@ -7,8 +7,9 @@ module.exports = (sequelize, DataTypes) => {
             autoIncrement: true
         },
         nome: {
-            type: DataTypes.STRING(99),
-            allowNull: false
+            type: DataTypes.STRING,
+            allowNull: false,
+            unique: true,
         },
         un_medida: {
             type: DataTypes.STRING(10),
@@ -23,10 +24,10 @@ module.exports = (sequelize, DataTypes) => {
         createdAt: false,
         updatedAt: false,
         freezeTableName: true,
-        tableName: 'pacientes'
+        tableName: 'equipamentos'
     });
     Equipamento.associate = (models) => {
-        Equipamento.hasMany(models.Consulta, {foreignKey: 'equipamento_id', as: 'equipamento'});
+        Equipamento.hasMany(models.Consulta, {foreignKey: 'equipamento_id', as: 'consultas'});
     }
     return Equipamento;
 }

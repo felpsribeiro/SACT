@@ -14,14 +14,8 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING(40),
             allowNull: false
         },
-        equipamento_disponivel: {
-            type: DataTypes.BOOLEAN,
-            allowNull: false
-        },
-        equipamento_id: {
-            type: DataTypes.INTEGER,
-            allowNull: false
-        },
+        equipamento_disponivel: DataTypes.BOOLEAN,
+        equipamento_id: DataTypes.INTEGER,
         paciente_id: {
             type: DataTypes.INTEGER,
             allowNull: false
@@ -35,12 +29,12 @@ module.exports = (sequelize, DataTypes) => {
         createdAt: false,
         updatedAt: false,
         freezeTableName: true,
-        tableName: 'pacientes'
+        tableName: 'consultas'
     });
     Consulta.associate = (models) => {
         Consulta.belongsTo(models.Equipamento, {foreignKey: 'equipamento_id', as: 'equipamento'});
-        Consulta.belongsTo(models.Paciente, {foreignKey: 'paciente_id', as: 'paciente'});
-        Consulta.belongsTo(models.Profissional, {foreignKey: 'profissional_id', as: 'profissional'});
+        Consulta.belongsTo(models.Paciente, {foreignKey: 'paciente_cpf', as: 'paciente'});
+        Consulta.belongsTo(models.Profissional, {foreignKey: 'profissional_cpf', as: 'profissional'});
     }
     return Consulta;
 }
