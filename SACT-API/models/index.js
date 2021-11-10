@@ -19,29 +19,21 @@ fs
     db[model.name] = model;
   });
 
+const init = async () => {
+  await db['Equipamento'].sync();
+  await db['Paciente'].sync();
+  await db['Profissional'].sync();
+  await db['Consulta'].sync();
+};
+init();
+
 Object.keys(db).forEach(modelName => {
-  //create table if not exists...
-  const init = async () => {
-    await db[modelName].sync();
-  };
-  init();
-  
   if (db[modelName].associate) {
     db[modelName].associate(db);
   }
-});
+})
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
-
-(async function () {
-  try {
-    await sequelize.authenticate();
-    console.log('Conexão com banco estabelecida com sucesso.\n\n');
-  } catch (error) {
-    console.error('Não foi possível se conectar com o banco: ', error);
-    console.log('********************************************');
-  }
-})();
 
 module.exports = db;
