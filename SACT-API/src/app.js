@@ -1,14 +1,12 @@
 const express = require("express");
-const fs = require('fs');
-const path = require('path');
 const validate = require("express-validation");
 
 class App {
   constructor() {
     this.PORT = 8080;
-    this.logFile = fs.createWriteStream(path.join(__dirname, '../access.log'), { flags: 'a' });
     // initializing express
     this.express = express();
+    this.express.use(express.json());
     // serving routes
     this.routes();
   }
