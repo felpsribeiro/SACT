@@ -1,6 +1,7 @@
 const express = require("express");
 const handle = require("express-async-handler");
 const validator = require("express-joi-validation").createValidator({});
+const codErros = require("./util/codErros");
 
 const validators = require("./validators");
 const controllers = require("./controllers");
@@ -93,6 +94,12 @@ routes.delete(
   "/consulta", 
   validator.query(validators.ConsultaValidator.destroy),
   handle(controllers.ConsultaController.destroy)
+);
+
+// Codigos de Erros
+routes.get(
+  "/codigos_erros",
+  (req, res) => res.json(codErros)
 );
 
 module.exports = routes;
