@@ -1,0 +1,18 @@
+[
+    {
+        "mensagem": "Já existe uma consulta marcada nesse horário.",
+        "codErro": 1
+    },
+    {
+        "mensagem": "Estoque de equipamentos insuficiente.",
+        "codErro": 2
+    },
+    {
+        "mensagem": "A consulta já foi realizada e não pode ser alterada.",
+        "codeErro": 3
+    },
+    {
+        "mensagem": "A consulta não está cadastrada.",
+        "codeErro": 4
+    }
+]
