@@ -1,9 +1,14 @@
 
 module.exports = (sequelize, DataTypes) => {
     const Profissional = sequelize.define('Profissional', {
+        id: {
+            type: DataTypes.INTEGER,
+            primaryKey: true,
+            autoIncrement: true,
+        },
         cpf: {
             type: DataTypes.STRING(11),
-            primaryKey: true
+            unique: true
         },
         nome: {
             type: DataTypes.STRING,
@@ -23,7 +28,7 @@ module.exports = (sequelize, DataTypes) => {
         tableName: 'profissionais'
     });
     Profissional.associate = (models) => {
-        Profissional.hasMany(models.Consulta, {foreignKey: 'profissional_cpf', as: 'consultas'});
+        Profissional.hasMany(models.Consulta, {foreignKey: 'profissional_id', as: 'consultas'});
     }
     return Profissional;
 }

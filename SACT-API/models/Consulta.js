@@ -8,14 +8,17 @@ module.exports = (sequelize, DataTypes) => {
         },
         horario: {
             type: DataTypes.DATE,
-            allowNull: false
+            allowNull: false,
+            unique: true,
         },
         endereco: {
             type: DataTypes.STRING(40),
             allowNull: false
         },
-        equipamento_disponivel: DataTypes.BOOLEAN,
-        equipamento_id: DataTypes.INTEGER,
+        equipamento_id: {
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },
         paciente_id: {
             type: DataTypes.INTEGER,
             allowNull: false
@@ -33,8 +36,8 @@ module.exports = (sequelize, DataTypes) => {
     });
     Consulta.associate = (models) => {
         Consulta.belongsTo(models.Equipamento, {foreignKey: 'equipamento_id', as: 'equipamento'});
-        Consulta.belongsTo(models.Paciente, {foreignKey: 'paciente_cpf', as: 'paciente'});
-        Consulta.belongsTo(models.Profissional, {foreignKey: 'profissional_cpf', as: 'profissional'});
+        Consulta.belongsTo(models.Paciente, {foreignKey: 'paciente_id', as: 'paciente'});
+        Consulta.belongsTo(models.Profissional, {foreignKey: 'profissional_id', as: 'profissional'});
     }
     return Consulta;
 }
