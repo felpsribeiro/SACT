@@ -7,6 +7,16 @@ const validators = require("./validators");
 const controllers = require("./controllers");
 const routes = express.Router();
 
+routes.get(
+  "/",
+  (req, res) => {
+    res.send(`
+      <center> 
+        <h1>Sistema de agendamento de consultas e testagem para COVID-19 - SACT API</h1>
+      </center>
+    `);
+  }
+)
 
 // Paciente 
 routes.get(
@@ -25,7 +35,7 @@ routes.put(
   handle(controllers.PacienteController.put)
 );
 routes.delete(
-  "/paciente", 
+  "/paciente",
   validator.query(validators.PacienteValidator.destroy),
   handle(controllers.PacienteController.destroy)
 );
@@ -47,7 +57,7 @@ routes.put(
   handle(controllers.ProfissionalController.put)
 );
 routes.delete(
-  "/profissional", 
+  "/profissional",
   validator.query(validators.ProfissionalValidator.destroy),
   handle(controllers.ProfissionalController.destroy)
 );
@@ -69,7 +79,7 @@ routes.put(
   handle(controllers.EquipamentoController.put)
 );
 routes.delete(
-  "/equipamento", 
+  "/equipamento",
   validator.query(validators.EquipamentoValidator.destroy),
   handle(controllers.EquipamentoController.destroy)
 );
@@ -91,7 +101,7 @@ routes.put(
   handle(controllers.ConsultaController.put)
 );
 routes.delete(
-  "/consulta", 
+  "/consulta",
   validator.query(validators.ConsultaValidator.destroy),
   handle(controllers.ConsultaController.destroy)
 );
