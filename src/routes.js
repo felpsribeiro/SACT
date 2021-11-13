@@ -12,7 +12,8 @@ routes.get(
   (req, res) => {
     res.send(`
       <center> 
-        <h1>Sistema de agendamento de consultas e testagem para COVID-19 - SACT API</h1>
+        <h1>Sistema de agendamento de consultas e testagem para COVID-19</h1>
+        <h1>SACT-API</h1>
       </center>
     `);
   }
