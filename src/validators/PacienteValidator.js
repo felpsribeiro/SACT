@@ -2,6 +2,7 @@ const Joi = require('joi');
 
 const get = Joi.object().keys({
     cpf: Joi.string().length(11),
+    idade: Joi.number(),
 });
 
 const post = Joi.object().keys({
